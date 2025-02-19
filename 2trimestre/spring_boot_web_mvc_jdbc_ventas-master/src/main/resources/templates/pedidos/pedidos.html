@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+    <th:block th:replace="~{fragmentos/estilos.html}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragmentos/nav.html}"></th:block>
+
+<div id="contenedora" style="float:none; margin: 0 auto;width: 95%;" >
+    <div class="clearfix">
+        <div style="float: left; width: 50%">
+            <h1 th:text="#{Pedidos}"></h1>
+        </div>
+        <div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
+            <div style="position: absolute; left: 39%; top : 39%;">
+                <form th:action="@{/pedidos/crear}">
+                    <button type="submit" class="btn btn-primary" th:text="#{Crear}"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <hr/>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th th:text="#{Id}"></th>
+            <th th:text="#{Total}"></th>
+            <th th:text="#{Fecha}"></th>
+            <th th:text="#{Clientes}"></th>
+            <th th:text="#{Comercial}"></th>
+            <th th:text="#{Accion}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pedido : ${listaPedidos}">
+            <td th:text="${pedido.id}">0</td>
+            <td th:text="${pedido.total}">total</td>
+            <td th:text="${pedido.fecha}">fecha</td>
+            <td th:text="${pedido.nombre_cliente}">cliente</td>
+            <td th:text="${pedido.nombre_comercial}">comercial</td>
+            <td>
+                <form th:action="@{/pedidos/__${pedido.id}__}" style="display: inline;">
+                    <button type="submit" class="btn btn-info" th:text="#{Ver.detalle}"></button>
+                </form>
+                <form th:action="@{/pedidos/editar/}+${pedido.id}" style="display: inline;">
+                    <button type="submit" class="btn btn-warning" th:text="#{Editar}"></button>
+                </form>
+                <form th:action="@{/pedidos/borrar/__${pedido.id}__}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger" th:text="#{Eliminar}"></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

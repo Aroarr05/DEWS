@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Fragmentos Thymeleaf: home</title>
+  <!-- Deprecado: include añade el contenido (etiquetas hijas) de la etiqueta marcada con th:fragment="headerfiles" -->
+   <th:block th:include="~{fragments/general.html :: headerfiles}">
+          </th:block>
+</head>
+<body>
+<header th:insert="fragments/general.html :: header"> </header>
+<div th:replace="fragments/formulario.html
+      :: formField(field='Nombre', value='Paco González',size='40')">
+</div>
+<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>

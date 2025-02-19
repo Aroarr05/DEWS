@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fragmentos Thymeleaf: home</title>
+    <!-- Deprecado. include añade el contenido (etiquetas hijas) de la etiqueta marcada con th:fragment="headerfiles" -->
+    <th:block th:include="fragments/general.html :: headerfiles"></th:block>
+</head>
+<body>
+<!-- insert inserta todo el fragmento con la etiqueta th:fragment="header" -->
+<header th:insert="fragments/general.html :: header"> </header>
+<p>Fragmentos en acción...</p>
+<!-- replace reemplaza la etiqueta por la que tiene th:fragment="footer" -->
+<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Fragmentos Thymeleaf: home</title>
+     Deprecado. include añade el contenido (etiquetas hijas) de la etiqueta marcada con th:fragment="headerfiles"
+    <th:block th:include="fragments/general.html :: headerfiles">
+    </th:block>
+</head>
+<body>
+<header th:insert="fragments/general.html :: header"> </header>
+<div th:replace="fragments/general.html :: aside"></div>
+ Selector css div.another para seleccionar el fragmento a cargar
+<div th:replace="fragments/general.html :: div.otro"></div>
+<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html> -->

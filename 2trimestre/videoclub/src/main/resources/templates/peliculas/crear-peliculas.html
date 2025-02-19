@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="#{Detalle.Cliente}"></title>
+  <th:block th:replace="~{fragmentos/estilos.html}"></th:block>
+</head>
+<body>
+
+<th:block th:replace="~{fragmentos/nav.html}"></th:block>
+
+<div id="contenedora" class="container mt-5">
+  <form th:action="@{/peliculas/crear}" th:object="${pelicula}" method="post">
+    <div class="text-center mb-4">
+      <h1>Crear Cliente</h1>
+    </div>
+
+    <div class="form-group">
+      <label for="titulo"th:text="#{Titulo}"></label>
+      <input id="titulo" th:field="*{titulo}" class="form-control"  />
+      <ul th:if="${#fields.hasErrors('titulo')}" class="text-danger">
+        <li th:each="err : ${#fields.errors('titulo')}" th:text="${err}" class="error"></li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion" th:text="#{Descripcion}"></label>
+      <input id="descripcion" th:field="*{descripcion}" class="form-control"  />
+      <ul th:if="${#fields.hasErrors('descripcion')}" class="text-danger">
+        <li th:each="err : ${#fields.errors('descripcion')}" th:text="${err}" class="error"></li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label for="anyo_lanzamiento" th:text="#{Ano}"></label>
+      <input id="anyo_lanzamiento" th:field="*{anyo_lanzamiento}" class="form-control" />
+      <ul th:if="${#fields.hasErrors('anyo_lanzamiento')}" class="text-danger">
+        <li th:each="err : ${#fields.errors('anyo_lanzamiento')}" th:text="${err}" class="error"></li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label for="id_idioma" th:text="#{ID.idioma}"></label>
+      <input id="id_idioma" th:field="*{id_idioma}" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="duracion" th:text="#{Duracion}"></label>
+      <input id="duracion" th:field="*{duracion}" class="form-control"/>
+      <ul th:if="${#fields.hasErrors('duracion')}" class="text-danger">
+        <li th:each="err : ${#fields.errors('duracion')}" th:text="${err}" class="error"></li>
+      </ul>
+    </div>
+
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary btn-lg px-4" th:text="#{Crear.Cliente}">Crear Cliente</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

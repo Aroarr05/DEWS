@@ -1,0 +1,30 @@
+<div th:fragment="formField (field, value, size)">
+  <div>
+    <!--
+    Ver los Expresion Utility Objects de thymelaef en su apidoc:
+    https://www.thymeleaf.org/apidocs/thymeleaf/3.0.0.RELEASE/index.html?org/thymeleaf/expression/package-summary.html
+
+	#dates: utility methods for java.util.Date objects
+	#calendars: similar to #dates, used for java.util.Calendar objects
+	#numbers: utility methods for formatting numeric objects
+	#strings: utility methods for String objects
+	#objects: utility methods for Java Object class in general
+	#bools: utility methods for boolean evaluation
+	#arrays: utility methods for arrays
+	#lists: utility methods for lists
+	#sets: utility methods for sets
+	#maps: utility methods for maps
+	#aggregates: utility methods for creating aggregates on arrays or collections
+	#messages: utility methods for obtaining externalized messages inside variables expressions
+     -->
+    <label th:for="${#strings.toLowerCase(field)}">
+      <span th:text="${field}">Field</span>
+    </label>
+  </div>
+
+  <div>
+    <input type="text" th:id="${#strings.toLowerCase(field)}"
+           th:name="${#strings.toLowerCase(field)}" th:value="${value}"
+           th:size="${size}">
+  </div>
+</div>

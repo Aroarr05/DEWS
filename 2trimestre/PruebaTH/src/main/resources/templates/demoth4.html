@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>DemoTH</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <div th:object="${libro}">
+    <span th:text="'Título: '+*{titulo}"></span>
+    <br/>
+    <span th:text="'Autor: '+*{autor}"></span>
+  </div>
+</body>
+</html>

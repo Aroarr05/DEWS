@@ -1,0 +1,24 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>DemoTH</title>
+  <style>
+    td {border: 1px solid black;}
+  </style>
+</head>
+<body>
+<table >
+  <!--/*/ <th:block th:each="libro : ${libroList}"> /*/-->
+  <tr>
+    <td th:text="${libro.titulo}">Título</td>
+    <td th:text="${libro.autor}">Autor</td>
+  </tr>
+  <tr>
+    <td colspan="2" th:text="${libro.editorial}" style="background-color: red;color:
+                       yellow;">Editorial</td>
+    <!--/*/ </th:block> /*/-->
+</table>
+</body>
+</html>
+

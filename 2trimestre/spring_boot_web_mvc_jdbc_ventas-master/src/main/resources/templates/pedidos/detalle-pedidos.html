@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Comercial</title>
+    <th:block th:replace="~{fragmentos/estilos.html}"></th:block>
+    <style>
+
+        .table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table .row {
+            display: flex;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table .row:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table .row .col-2 {
+            width: 16.66%;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .table .row .col-2 strong {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .table .row a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .table .row a:hover {
+            text-decoration: underline;
+        }
+
+        .table .row:first-child {
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        hr {
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="~{fragmentos/nav.html}"></th:block>
+
+<div id="contenedora">
+    <div class="clearfix">
+        <div style="float: left; width: 50%">
+            <h1>Detalle Pedido</h1>
+        </div>
+        <div style="float: none;width: auto; overflow: hidden; min-height: 80px; position: relative;">
+            <div style="position: absolute; left: 39%; top: 39%;">
+                <form action="/comerciales">
+                    <button type="submit" class="btn btn-primary">Volver</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">
+        <hr/>
+    </div>
+
+    <div class="form-group">
+        <label for="id">ID</label>
+        <input id="id" th:value="${pedido.id}" class="form-control" readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <label for="total">Total</label>
+        <input id="total" th:value="${pedido.total}" class="form-control" readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input id="fecha" th:value="${pedido.fecha}" class="form-control" readonly="readonly"/>
+    </div>
+    <!--Hago que se vea el nombre de cliente y comercial en ve la id en el detalle-->
+    <div class="form-group">
+        <label for="cliente">Cliente</label>
+        <input id="cliente" th:value="${cliente.nombre}" class="form-control" readonly="readonly"/>
+    </div>
+    <div class="form-group">
+        <label for="comercial">Comercial</label>
+        <input id="comercial" th:value="${comercial.nombre}" class="form-control" readonly="readonly"/>
+    </div>
+</div>
+
+</body>
+</html>

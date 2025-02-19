@@ -1,0 +1,46 @@
+<div>
+
+  <div class="d-flex justify-content-between">
+    <h4>Pelicula</h4>
+    <a href="#" routerLink="/pelicula/index" class="btn">Volver</a>
+  </div>
+
+  <hr/>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="form-group row">
+      <div class="col-md-6 ">
+        <label for="titulo">Titulo:</label>
+        <input
+          formControlName="titulo"
+          id="titulo"
+          type="text"
+          class="form-control">
+        <div *ngIf="f.titulo.touched && f.titulo.invalid" class="alert alert-danger">
+          <div *ngIf="f.titulo.errors.required">*El titulo es requerido.</div>
+          <div *ngIf="f.titulo.errors.pattern">*El titulo sólo puede contener letras.</div>
+        </div>
+      </div>
+      <div>
+        <label for="anyoLanzamiento">Año de lanzamiento:</label>
+        <input formControlName="anyoLanzamiento" id="anyoLanzamiento" type="date" class="form-control">
+      </div>
+      <div>
+        <label for="idioma">Idioma:</label>
+        <input formControlName="idioma" id="idioma" type="text" class="form-control">
+      </div>
+      <div>
+        <label for="duracion">Duracion:</label>
+        <input formControlName="duracion" id="duracion" type="text" class="form-control">
+      </div>
+      <div>
+        <label for="categoria">Categoria:</label>
+        <input formControlName="categoria" id="categoria" type="text" class="form-control">
+      </div>
+
+    </div>
+
+    <button class="btn btn-primary mt-1" type="submit" [disabled]="!form.valid">Enviar</button>
+  </form>
+</div>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DemoTH</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<p th:text="${unaVariable}"></p>
+<p th:text="${session.unaVariableDeSesion}"></p>
+
+<!-- Acceso a atributos de sesión mediante el objeto implícito session
+y el uso del identificador de atributo ElQuijote con acceso a método de getAutor
+por autor directamente -->
+<p th:text="${session.ElQuijote.autor}"></p>
+</body>
+</html>

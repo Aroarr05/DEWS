@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="header">
+    <h1>Fragmento Thymeleaf de Ejemplo</h1>
+</div>
+<p>Los potentes fragmentos de Thymeleaf</p>
+<aside>
+    <div>Esto es un sidebar</div>
+</aside>
+<div class="otro">Otro sidebar</div>
+<footer th:fragment="footer">
+    <a th:href="@{/fragments}">Fragmentos</a> |
+    <a th:href="@{/markup}">Markup</a> |
+    <a th:href="@{/params}">Fragmentos params</a> |
+    <a th:href="@{/other}">Otros</a>
+</footer>
+</body>
+</html>
