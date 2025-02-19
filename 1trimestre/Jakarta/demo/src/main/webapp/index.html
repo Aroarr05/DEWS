@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Alhambra</title>
+</head>
+
+<body>
+<br>
+<br>
+<hr>
+
+<h2>Formulario para contactar con nosotros:</h2>
+<form action="hello-servlet" method="post">
+    <div>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <br>
+    <div>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+    </div>
+    <br>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <br>
+    <div>
+        <label>Sexo:</label>
+        <div>
+            <input type="radio" id="mujer" name="fsexo" value="mujer">
+            <label for="mujer">Mujer</label>
+        </div>
+        <div>
+            <input type="radio" id="hombre" name="fsexo" value="hombre">
+            <label for="hombre">Hombre</label>
+        </div>
+    </div>
+    <br>
+    <div>
+        <label for="mensaje">Ingresa aquí tu mensaje:</label><br>
+        <textarea id="mensaje" name="mensaje" rows="8" cols="50" placeholder="...Tu mensaje aquí..."></textarea>
+    </div>
+    <br>
+    <div>
+        <input type="checkbox" id="publicidad" name="publicidad">
+        <label for="publicidad">Deseo recibir publicidad futura en mi dirección de email.</label>
+    </div>
+    <br>
+    <div>
+        <label for="procedencia"><b>Procedencia</b></label>
+        <select name="procedencia" id="procedencia">
+            <option value="España">España</option>
+            <option value="Francia">Francia</option>
+            <option value="Italia">Italia</option>
+            <option value="Alemania">Alemania</option>
+            <option value="Inglaterra">Inglaterra</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <label for="fichero">Ingresa el archivo que quieras adjuntar</label>
+        <input type="file" id="fichero" name="fichero">
+    </div>
+    <br>
+    <input type="submit" value="Enviar">
+    <input type="reset" value="Borrar los datos">
+</form>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+CREATE DATABASE tiendaSkinsValorant;
+
+USE tiendaSkinsValorant; -- Asegura que estamos utilizando la base de datos correcta
+
+-- Table: usuario
+CREATE TABLE usuario (
+    idUsuario INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    rol VARCHAR(50) NOT NULL,
+    PRIMARY KEY (idUsuario)
+);
+
+-- Table: categoria
+CREATE TABLE categoria (
+    idCategoria INT NOT NULL AUTO_INCREMENT,
+    nameCategoria VARCHAR(50) NOT NULL, -- Nombre de la categoría, por ejemplo, "Armas", "Personajes"
+    PRIMARY KEY (idCategoria)
+);
+
+-- Table: skin (producto)
+CREATE TABLE skin (
+    idSkin INT AUTO_INCREMENT PRIMARY KEY,
+    idCategoria INT NOT NULL, -- Relación con la categoría de la skin (arma, personaje, etc.)
+    nombre VARCHAR(50) NOT NULL,
+    precio INT NOT NULL, -- Precio de la skin en puntos (puedes cambiar a moneda si prefieres)
+    descripcion VARCHAR(255) NOT NULL,
+    imagenURL VARCHAR(255) NOT NULL, -- URL de la imagen de la skin
+    FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria)
+);
+
+-- Table: pedido
+CREATE TABLE pedido (
+    idPedido INT AUTO_INCREMENT PRIMARY KEY,
+    idUsuario INT NOT NULL,
+    idSkin INT NOT NULL,
+        FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario),
+    FOREIGN KEY (idSkin) REFERENCES skin(idSkin)
+);
+
+-- Table: datoPedido (detalles de cada skin en un pedido)
+CREATE TABLE datoPedido (
+    idDatoPedido INT AUTO_INCREMENT PRIMARY KEY,
+    idPedido INT NOT NULL,
+    idSkin INT NOT NULL,
+    total INT NOT NULL, -- El total del pedido para esta skin
+    FOREIGN KEY (idPedido) REFERENCES pedido(idPedido),
+    FOREIGN KEY (idSkin) REFERENCES skin(idSkin)
+);
+
+-- Insertar datos de ejemplo
+
+-- Insertar usuarios
+INSERT INTO usuario (nombre, apellidoUno, apellidoDos, rol, puntos) VALUES
+('Juan', 'Perez', 'Lopez', 'Admin', 1000),
+('Maria', 'Gonzalez', 'Martinez', 'Customer', 500),
+('Carlos', 'Ramirez', 'Hernandez', 'Customer', 300),
+('Lucia', 'Sanchez', 'Diaz', 'Customer', 200),
+('Sofia', 'Castro', 'Garcia', 'Admin', 1500);
+
+-- Insertar categorías de skins
+INSERT INTO categoria (nameCategoria) VALUES
+('Armas'),
+('Personajes'),
+('Accesorios');
+
+-- Insertar skins (productos)
+INSERT INTO skin (idCategoria, nombre, precio, descripcion, imagenURL) VALUES
+(1, 'Skin de Rifle Phantom', 300, 'Skin exclusiva para el rifle Phantom', 'https://link-to-image.com/phantom.jpg'),
+(1, 'Skin de Ares', 400, 'Skin para el Ares', 'https://link-to-image.com/ares.jpg'),
+(2, 'Skin de Jett', 500, 'Skin para el personaje Jett', 'https://link-to-image.com/jett.jpg'),
+(3, 'Accesorio de Gadget', 150, 'Accesorio de gadget para personalización', 'https://link-to-image.com/gadget.jpg');
+
+-- Insertar pedidos
+INSERT INTO pedido (idUsuario, idSkin) VALUES
+(2, 1),
+(2, 3),
+(3, 4),
+(4, 2),
+(5, 1);
+
+-- Insertar datos del pedido (detalles de las skins en el pedido)
+INSERT INTO datoPedido (idPedido, idSkin, total) VALUES
+(1, 1, 300),
+(2, 3, 500),
+(3, 4, 150),
+(4, 2, 400),
+(5, 1, 300);
+

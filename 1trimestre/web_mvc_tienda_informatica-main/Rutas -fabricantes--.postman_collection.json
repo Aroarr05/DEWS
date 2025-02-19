@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "5a9157f6-9e67-4900-bee1-70b79ef45bb1",
+		"name": "Rutas /fabricantes/*",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/fabricantes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tienda_informatica/fabricantes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda_informatica",
+						"fabricantes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fabricantes/crear",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tienda_informatica/fabricantes/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda_informatica",
+						"fabricantes",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/fabricantes/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tienda_informatica/fabricantes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda_informatica",
+						"fabricantes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/fabricantes/editar/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tienda_informatica/fabricantes/editar/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda_informatica",
+						"fabricantes",
+						"editar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/fabricantes/crear",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Nuevo fabricante",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/tienda_informatica/fabricantes/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda_informatica",
+						"fabricantes",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/fabricantes/editar/{id}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "__method__",
+							"value": "PUT",
+							"type": "default"
+						},
+						{
+							"key": "codigo",
+							"value": "1",
+							"type": "default"
+						},
+						{
+							"key": "nombre",
+							"value": "Otro fabricante",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/tienda_informatica/fabricantes/editar/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda_informatica",
+						"fabricantes",
+						"editar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/fabricantes/borrar/{id}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "__method__",
+							"value": "DELETE",
+							"type": "default"
+						},
+						{
+							"key": "codigo",
+							"value": "1",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/tienda_informatica/fabricantes/borrar/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tienda_informatica",
+						"fabricantes",
+						"borrar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,28 @@
+<%@ page import="org.iesbelen.model.Usuario" %>
+<nav class="menu">
+  <a href="/web_empleados/">HOME</a>
+  <a href="/web_empleados/empleados/empleado/">Empleados</a>
+  <a href="/web_empleados/empleados/departamento/">Departemto</a>
+  <a href="/web_empleados/empleados/usuarios/">Usuarios</a>
+  <div class="menu-log">
+    <%
+      Usuario us = (Usuario) session.getAttribute("usuario-logado");
+      if (us != null) {
+    %>
+    <h1>Bienvenido, <%= us.getUsuario() %></h1>
+    <form action="${pageContext.request.contextPath}/empleados/usuarios/logout/" method="post" style="display: inline;">
+      <input type="hidden" name="__method__" value="logout"/>
+      <button type="submit" class="btn">Logout</button>
+    </form>
+    <%
+    } else {
+    %>
+    <form action="${pageContext.request.contextPath}/empleados/usuarios/login/" method="post" style="display: inline;">
+      <input type="hidden" name="__method__" value="login"/>
+      <button type="submit" class="btn">Login</button>
+    </form>
+    <%
+      }
+    %>
+  </div>
+</nav>
