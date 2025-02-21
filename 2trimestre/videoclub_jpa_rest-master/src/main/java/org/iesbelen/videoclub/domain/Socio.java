@@ -16,6 +16,7 @@ public class Socio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String dni;
     private String nombre;
@@ -30,6 +31,9 @@ public class Socio {
             @AttributeOverride(name = "zipCode" , column = @Column(name ="zip_code")),
     })
     private Set<Address> addresses = new HashSet<>();
+
+    @Embedded // 4.6
+    private Address mainAddress; // 4.6
 
     @ElementCollection
     @CollectionTable(name = "socio_phone_numbers", joinColumns = @JoinColumn(name = "socio_id"))
