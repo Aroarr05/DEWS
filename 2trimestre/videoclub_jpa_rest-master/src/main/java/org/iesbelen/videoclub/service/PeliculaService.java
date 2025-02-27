@@ -34,6 +34,7 @@ public class PeliculaService {
         return this.peliculaRepository.findAll();
     }
 
+    //Paginado y orden múltiples sobre arrays
     public Map<String, Object> all(int pagina, int tamanio){
         Pageable paginado = PageRequest.of(pagina, tamanio, Sort.by("idPelicula").ascending());
 
@@ -47,9 +48,35 @@ public class PeliculaService {
         response.put("totalPages", pageAll.getTotalPages());
 
         return response;
-
     }
 
+    public List<Pelicula> obtenerPeliculasConOrdenYPaginado(String[] orden, String[] paginado) {
+        Sort sort = null;
+
+        if (orden != null) {
+            for (String criterio : orden) {
+                String[] partes = criterio.split(",");
+                if (partes.length == 2) {
+                    String columna = partes[0];
+                    String sentido = partes[1];
+                    Sort.Order order = new Sort.Order("asc".equalsIgnoreCase(sentido) ? Sort.Direction.ASC : Sort.Direction.DESC, columna);
+                    sort = (sort == null) ? Sort.by(order) : sort.and(Sort.by(order));
+                }
+            }
+        }
+
+        Pageable pageable = Pageable.unpaged();
+        if (paginado != null && paginado.length == 2) {
+            int pagina = Integer.parseInt(paginado[0]);
+            int tamanio = Integer.parseInt(paginado[1]);
+            pageable = PageRequest.of(pagina, tamanio, sort != null ? sort : Sort.unsorted());
+        }
+
+        Page<Pelicula> peliculas = peliculaRepository.findAll(pageable);
+        return peliculas.getContent();
+    }
+
+    //---------------
     public Pelicula save(Pelicula pelicula) {
         return this.peliculaRepository.save(pelicula);
     }
