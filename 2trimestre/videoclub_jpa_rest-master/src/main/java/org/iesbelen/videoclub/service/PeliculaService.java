@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,7 @@ public class PeliculaService {
         return this.peliculaRepository.findAll();
     }
 
+
     //Paginado y orden múltiples sobre arrays
     public Map<String, Object> all(int pagina, int tamanio){
         Pageable paginado = PageRequest.of(pagina, tamanio, Sort.by("idPelicula").ascending());
@@ -50,30 +52,24 @@ public class PeliculaService {
         return response;
     }
 
-    public List<Pelicula> obtenerPeliculasConOrdenYPaginado(String[] orden, String[] paginado) {
-        Sort sort = null;
+    public List<Pelicula> obtenerPeliculasConOrdenYPaginado(String[] orden) {
+        Sort sort = null; // ordena
+
+        List<Pelicula> peliculas = peliculaRepository.findAll();
 
         if (orden != null) {
             for (String criterio : orden) {
-                String[] partes = criterio.split(",");
-                if (partes.length == 2) {
-                    String columna = partes[0];
-                    String sentido = partes[1];
+                if (orden.length == 2) {
+                    String columna = orden[0];
+                    String sentido = orden[1];
                     Sort.Order order = new Sort.Order("asc".equalsIgnoreCase(sentido) ? Sort.Direction.ASC : Sort.Direction.DESC, columna);
                     sort = (sort == null) ? Sort.by(order) : sort.and(Sort.by(order));
                 }
             }
         }
 
-        Pageable pageable = Pageable.unpaged();
-        if (paginado != null && paginado.length == 2) {
-            int pagina = Integer.parseInt(paginado[0]);
-            int tamanio = Integer.parseInt(paginado[1]);
-            pageable = PageRequest.of(pagina, tamanio, sort != null ? sort : Sort.unsorted());
-        }
-
-        Page<Pelicula> peliculas = peliculaRepository.findAll(pageable);
-        return peliculas.getContent();
+        List<Pelicula> pelicula = peliculaRepository.findAll(orden);
+        return pelicula.getContent();
     }
 
     //---------------

@@ -20,28 +20,24 @@ import java.util.Set;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/peliculas")
 public class PeliculaController {
+
     private final PeliculaService peliculaService;
     private final CategoriaService categoriaService;
 
     public PeliculaController(PeliculaService peliculaService, CategoriaService categoriaService) {
-
         this.peliculaService = peliculaService;
         this.categoriaService = categoriaService;
     }
 
-    @GetMapping(value = {"","/"}, params = {"!pagina", "!tamanio"})
+    @GetMapping(value = {"","/"}, params = {"!pagina", "!tamanio", "!orden", "!paginado"})
     public List<Pelicula> all() {
         log.info("Accediendo a todas las películas");
         return this.peliculaService.all();
     }
 
     @GetMapping(value = {"","/"})
-    public List<Pelicula> obtenerPeliculas(
-            @RequestParam(value = "orden", required = false) String[] orden,
-            @RequestParam(value = "paginado", required = false) String[] paginado) {
-
-        // Llamar al servicio para obtener las películas con el orden y paginado proporcionados
-        return peliculaService.obtenerPeliculasConOrdenYPaginado(orden, paginado);
+    public List<Pelicula> obtenerPeliculas(@RequestParam(value = "orden", required = false) String[] orden){
+        return peliculaService.obtenerPeliculasConOrdenYPaginado(orden);
     }
 
     @GetMapping(value = {"","/"})
