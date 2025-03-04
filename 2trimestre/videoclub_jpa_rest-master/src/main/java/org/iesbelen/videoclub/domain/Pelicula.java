@@ -51,5 +51,4 @@ public class Pelicula {
 
     Set<Categoria> categorias = new HashSet<>();
 
-
 }
