@@ -31,6 +31,7 @@ public class Idioma {
 
     private String nombre;
 
+    // relacion de uno a muchos
     @OneToMany(mappedBy = "idioma") //Un idioma puede estar asociado a muchas peliculas, el mappedBy significa que esta definida en la entidad de Pelicula
     @JsonIgnore // Evita problemas de serialización ciclica en Json(cuando una pelicula tiene un idioma y el idioma tiene peliculas, creando un bucle infinito)
     private List<Pelicula> peliculasIdioma;

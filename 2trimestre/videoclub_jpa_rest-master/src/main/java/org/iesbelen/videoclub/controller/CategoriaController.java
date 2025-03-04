@@ -5,25 +5,24 @@ import org.iesbelen.videoclub.domain.Categoria;
 import org.iesbelen.videoclub.domain.Pelicula;
 import org.iesbelen.videoclub.service.CategoriaService;
 import org.iesbelen.videoclub.service.PeliculaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
+@Slf4j // Genera el logger automáticamente
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/categorias")
 
 public class CategoriaController {
 
-        private final CategoriaService categoriaService;
+        @Autowired
+        private CategoriaService categoriaService;
 
-        public CategoriaController(CategoriaService categoriaService) {
-            this.categoriaService = categoriaService;
-        }
-
+        //Obtener todos los usuarios
         @GetMapping(value = {"","/"}, params = {"!buscar", "!ordenar"})
         public List<Categoria> all() {
             log.info("Accediendo a todas las categorias");
@@ -46,28 +45,31 @@ public class CategoriaController {
             return this.categoriaService.one(id).getPeliculas().size();
         }
 
+        //Crear una nueva categoria
         @PostMapping({"","/"})
         public Categoria newPelicula(@RequestBody Categoria categoria) {
             return this.categoriaService.save(categoria);
         }
 
+        //Buscar los categoria con id
         @GetMapping("/{id}")
         public Categoria one(@PathVariable("id") Long id) {
             return this.categoriaService.one(id);
         }
 
+        //Actualizar la categoria con id
         @PutMapping("/{id}")
         public Categoria replacePelicula(@PathVariable("id") Long id, @RequestBody Categoria categoria) {
             return this.categoriaService.replace(id, categoria);
         }
 
+        //Eliminar usuario
         @ResponseBody
         @ResponseStatus(HttpStatus.NO_CONTENT)
         @DeleteMapping("/{id}")
         public void deletePelicula(@PathVariable("id") Long id) {
             this.categoriaService.delete(id);
         }
-
 
     }
 

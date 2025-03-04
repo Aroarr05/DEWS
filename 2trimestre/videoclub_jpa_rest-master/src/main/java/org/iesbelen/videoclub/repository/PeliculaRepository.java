@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
-
     Pelicula findByDuracionLessThan(int cantidad);
 }

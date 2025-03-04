@@ -41,6 +41,7 @@ public class Socio {
     private Set<String> phoneNumbers;
 
 
+    //Relacion de uno a uno con la tarjeta
     @OneToOne
     @JoinColumn(name="tarjeta_id", referencedColumnName = "id")
     private Tarjeta tarjeta;

@@ -19,9 +19,11 @@ import java.util.Set;
 
 @Entity
 @Table(name="pelicula")
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Pelicula {
 
     @Id
@@ -37,12 +39,14 @@ public class Pelicula {
     @JsonFormat(pattern = "yyyy",  shape = JsonFormat.Shape.STRING)
     private Year anyoLanzamiento;
 
+    // relacion de muchos a uno
     @ManyToOne()
     @JoinColumn(name = "id_idioma", nullable = false)
     private Idioma idioma;
 
     private int duracion;
 
+    // relacion de muchos a muchos
     @ManyToMany
     @JoinTable(
             name = "pelicula_categoria",

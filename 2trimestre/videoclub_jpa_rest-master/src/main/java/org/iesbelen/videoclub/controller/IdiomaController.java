@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.iesbelen.videoclub.domain.Categoria;
 import org.iesbelen.videoclub.domain.Idioma;
 import org.iesbelen.videoclub.service.IdiomaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +15,10 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/idiomas")
 public class IdiomaController {
-    private final IdiomaService idiomaService;
 
-    public IdiomaController(IdiomaService idiomaService) {
-        this.idiomaService = idiomaService;
-    }
+    @Autowired
+    private IdiomaService idiomaService;
+
 
     @GetMapping({"","/"})
     public List<Idioma> all() {
