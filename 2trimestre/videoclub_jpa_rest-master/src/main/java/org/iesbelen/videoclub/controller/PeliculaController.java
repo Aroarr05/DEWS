@@ -35,18 +35,28 @@ public class PeliculaController {
         return this.peliculaService.all();
     }
 
-    @GetMapping(value = {"","/"})
-    public List<Pelicula> obtenerPeliculas(@RequestParam(value = "orden", required = false) String[] orden){
-        return peliculaService.obtenerPeliculasConOrdenYPaginado(orden);
-    }
-
-    @GetMapping(value = {"","/"})
+    @GetMapping(value = {"","/"}, params = {"!orden", "!paginado"})
     public ResponseEntity<Map<String, Object>> all (@RequestParam(value = "pagina", defaultValue = "0")int pagina,
     @RequestParam(value = "tamanio", defaultValue = "3") int tamanio){
         log.info("Accediendo a todas las peliculas con paginación");
         Map<String, Object> responseAll= this.peliculaService.all(pagina,tamanio);
         return ResponseEntity.ok(responseAll);
     }
+
+    @GetMapping(value = {"","/"}, params = {"!pagina", "!tamanio", "!paginado"})
+   public ResponseEntity<List<Pelicula>> obtenerPeliculasCuston(@RequestParam(value = "orden", required = false)String[] orden){
+        log.info("Accediendo a todas las peliculas con ordenación: " + orden[0]);
+
+    List<Pelicula> peliculas = this.peliculaService.obtenerPeliculasOrden(orden);
+    return ResponseEntity.ok(peliculas);
+   }
+
+   @GetMapping(value = {"","/"}, params = {"!pagina", "!tamanio", "!orden"})
+   public ResponseEntity<Map<String, Object>> all(@RequestParam(value = "paginado", defaultValue = "0")String[] paginacion){
+        log.info("Accediendo a todas las peliculas con paginado");
+        Map<String,Object> responseAll = this.peliculaService.all(paginacion);
+        return ResponseEntity.ok(responseAll);
+   }
 
     @PostMapping({"","/"})
     public Pelicula newPelicula(@RequestBody Pelicula pelicula) {
@@ -80,6 +90,7 @@ public class PeliculaController {
         this.peliculaService.replace(idPelicula, pelicula);
 
     }
+
 //    public void addCategoria(@PathVariable("id") Long idPelicula,
 //                              @PathVariable("id_categoria") Long id_categoria) {
 //

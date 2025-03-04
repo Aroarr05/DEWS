@@ -1,40 +1,42 @@
 package org.iesbelen.videoclub.service;
 
+import org.iesbelen.videoclub.domain.Categoria;
 import org.iesbelen.videoclub.exception.PeliculaNotFoundException;
+import org.iesbelen.videoclub.repository.PeliculaCustomRepsitory;
 import org.iesbelen.videoclub.repository.PeliculaRepository;
 import org.iesbelen.videoclub.domain.Pelicula;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PeliculaService {
 
-    private final PeliculaRepository peliculaRepository;
+    @Autowired
     private final CategoriaService categoriaService;
 
+    @Autowired
+    private final PeliculaRepository peliculaRepository;
 
-    public PeliculaService(PeliculaRepository peliculaRepository, CategoriaService categoriaService) {
+    @Autowired
+    private final PeliculaCustomRepsitory peliculaCustomRepsitory;
 
+    public PeliculaService(PeliculaRepository peliculaRepository, CategoriaService categoriaService, PeliculaCustomRepsitory peliculaCustomRepsitory) {
         this.peliculaRepository = peliculaRepository;
         this.categoriaService = categoriaService;
+        this.peliculaCustomRepsitory = peliculaCustomRepsitory;
     }
 
     private  Pelicula pelicculasDuracionMenor(int cantidad){
         return this.peliculaRepository.findByDuracionLessThan(cantidad);
     }
 
-    public List<Pelicula> all() {
-        return this.peliculaRepository.findAll();
-    }
-
+    //////////////////////////////////////////////////////////////
 
     //Paginado y orden múltiples sobre arrays
     public Map<String, Object> all(int pagina, int tamanio){
@@ -52,27 +54,41 @@ public class PeliculaService {
         return response;
     }
 
-    public List<Pelicula> obtenerPeliculasConOrdenYPaginado(String[] orden) {
-        Sort sort = null; // ordena
+    public Map<String, Object> all(String[] paginacion){
+        Pageable paginado = PageRequest.of(Integer.parseInt (paginacion[0]), Integer.parseInt(paginacion[1]), Sort.by("idPelicula").ascending());
 
-        List<Pelicula> peliculas = peliculaRepository.findAll();
-
-        if (orden != null) {
-            for (String criterio : orden) {
-                if (orden.length == 2) {
-                    String columna = orden[0];
-                    String sentido = orden[1];
-                    Sort.Order order = new Sort.Order("asc".equalsIgnoreCase(sentido) ? Sort.Direction.ASC : Sort.Direction.DESC, columna);
-                    sort = (sort == null) ? Sort.by(order) : sort.and(Sort.by(order));
-                }
-            }
-        }
-
-        List<Pelicula> pelicula = peliculaRepository.findAll(orden);
-        return pelicula.getContent();
+        Page<Pelicula> pageAll = this.peliculaRepository.findAll(paginado);
+        Map<String, Object> response = new HashMap<>();
+            response.put("peliculas", pageAll.getContent());
+            response.put("currentPage", pageAll.getNumber());
+            response.put("totalPages", pageAll.getTotalPages());
+            response.put("totalItems", pageAll.getTotalElements());
+        return response;
     }
 
+    public List<Pelicula> obtenerPeliculasCuston(String[] orden) {
+        return peliculaCustomRepsitory.pelisOrdenadabyColSentido(Optional.of(orden));
+    }
+
+    public List<Pelicula> obtenerPeliculasOrden(String[] orden) {
+        Sort sort = null;
+        if (orden != null && orden.length == 2) {
+            String columna = orden[0];
+            String sentido = orden[1];
+            if ("asc".equalsIgnoreCase(sentido)){
+                sort = Sort.by(columna).ascending();
+            }else {
+                sort = Sort.by(columna).descending();
+            }
+        }
+        return this.peliculaRepository.findAll(sort);
+    }
+
+    public List<Pelicula> all() {
+        return this.peliculaRepository.findAll();
+    }
     //---------------
+
     public Pelicula save(Pelicula pelicula) {
         return this.peliculaRepository.save(pelicula);
     }
@@ -96,6 +112,7 @@ public class PeliculaService {
                 .orElseThrow(() -> new PeliculaNotFoundException(id));
     }
 
+    //---------------
 
 //    public boolean addCategoriaToPelicula(Long idPeliucla, Long idCategoria) {
 //        boolean res = false;
@@ -108,6 +125,5 @@ public class PeliculaService {
 //        }
 //        return res;
 //    }
-
 
 }
