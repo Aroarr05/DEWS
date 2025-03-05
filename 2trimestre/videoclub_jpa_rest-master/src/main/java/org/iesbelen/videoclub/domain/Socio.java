@@ -32,8 +32,9 @@ public class Socio {
     })
     private Set<Address> addresses = new HashSet<>();
 
-    @Embedded // 4.6
-    private Address mainAddress; // 4.6
+    //la lista solo tiene una direccion
+    @Embedded
+    private Address mainAddress;
 
     @ElementCollection
     @CollectionTable(name = "socio_phone_numbers", joinColumns = @JoinColumn(name = "socio_id"))

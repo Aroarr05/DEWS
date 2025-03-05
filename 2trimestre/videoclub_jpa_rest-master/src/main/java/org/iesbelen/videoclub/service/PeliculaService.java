@@ -55,34 +55,27 @@ public class PeliculaService {
     }
 
     public Map<String, Object> all(String[] paginacion){
-        Pageable paginado = PageRequest.of(Integer.parseInt (paginacion[0]), Integer.parseInt(paginacion[1]), Sort.by("idPelicula").ascending());
-
-        Page<Pelicula> pageAll = this.peliculaRepository.findAll(paginado);
-        Map<String, Object> response = new HashMap<>();
-            response.put("peliculas", pageAll.getContent());
-            response.put("currentPage", pageAll.getNumber());
-            response.put("totalPages", pageAll.getTotalPages());
-            response.put("totalItems", pageAll.getTotalElements());
-        return response;
+        return this.all(Integer.parseInt(paginacion[0]), Integer.parseInt(paginacion[1]));
     }
 
     public List<Pelicula> obtenerPeliculasCuston(String[] orden) {
         return peliculaCustomRepsitory.pelisOrdenadabyColSentido(Optional.of(orden));
+        //return this.peliculaRepository.findAll(Sort.by(orden[0]));
     }
 
-    public List<Pelicula> obtenerPeliculasOrden(String[] orden) {
-        Sort sort = null;
-        if (orden != null && orden.length == 2) {
-            String columna = orden[0];
-            String sentido = orden[1];
-            if ("asc".equalsIgnoreCase(sentido)){
-                sort = Sort.by(columna).ascending();
-            }else {
-                sort = Sort.by(columna).descending();
-            }
-        }
-        return this.peliculaRepository.findAll(sort);
-    }
+//    public List<Pelicula> obtenerPeliculasOrden(String[] orden) {
+//        Sort sort = null;
+//        if (orden != null && orden.length == 2) {
+//            String columna = orden[0];
+//            String sentido = orden[1];
+//            if ("asc".equalsIgnoreCase(sentido)){
+//                sort = Sort.by(columna).ascending();
+//            }else {
+//                sort = Sort.by(columna).descending();
+//            }
+//        }
+//        return this.peliculaRepository.findAll(sort);
+//    }
 
     public List<Pelicula> all() {
         return this.peliculaRepository.findAll();

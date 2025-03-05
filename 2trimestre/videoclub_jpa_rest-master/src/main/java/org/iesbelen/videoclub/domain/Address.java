@@ -10,6 +10,7 @@ import lombok.*;
 @Builder
 @ToString
 
+//Una clase que se añade dentro de otra
 //No se usa @ENTITY, es un embeddable
 @Embeddable
 public class Address {

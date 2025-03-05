@@ -47,7 +47,7 @@ public class PeliculaController {
    public ResponseEntity<List<Pelicula>> obtenerPeliculasCuston(@RequestParam(value = "orden", required = false)String[] orden){
         log.info("Accediendo a todas las peliculas con ordenación: " + orden[0]);
 
-    List<Pelicula> peliculas = this.peliculaService.obtenerPeliculasOrden(orden);
+    List<Pelicula> peliculas = this.peliculaService.obtenerPeliculasCuston(orden);
     return ResponseEntity.ok(peliculas);
    }
 

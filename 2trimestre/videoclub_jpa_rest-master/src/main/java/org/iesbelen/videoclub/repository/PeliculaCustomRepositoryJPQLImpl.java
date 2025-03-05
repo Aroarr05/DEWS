@@ -19,16 +19,12 @@ public class PeliculaCustomRepositoryJPQLImpl implements PeliculaCustomRepsitory
      StringBuilder queryBuilder = new StringBuilder("Select p from Pelicula as p");
     if (orden.isPresent()) {
         String[] ordenes = orden.get();
-        queryBuilder.append(" ORDER BY ");
+        if (ordenes.length == 2) {
+            queryBuilder.append(" ORDER BY ");
+            String column = ordenes[0];
+            String direction = ordenes[1];
+            queryBuilder.append("p."+column+ " ").append(direction.equalsIgnoreCase("asc") ? "ASC" : "DESC");
 
-        for (int i = 0; i < ordenes.length; i++) {
-            String[] parts = ordenes[i].split(",");
-            String column = parts[0];
-            String direction = parts[1];
-            queryBuilder.append("p."+column+ " ").append(direction);
-            if (i < ordenes.length -1){
-                queryBuilder.append(", ");
-            }
         }
     }
     return em.createQuery(queryBuilder.toString(), Pelicula.class).getResultList();
