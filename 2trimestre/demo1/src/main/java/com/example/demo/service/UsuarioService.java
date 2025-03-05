@@ -35,8 +35,9 @@ public class UsuarioService {
     }
 
     public Usuario delete(Long id){
-        this.usuarioRepsitory.deleteById(id).map(p ->{this.usuarioRepsitory.delete(p);
-        return p;})
-                .orElseThrow(()-> new )
+        this.usuarioRepsitory.deleteById(id).map(u ->{this.usuarioRepsitory.delete(u);
+                return u;})
+                .orElseThrow(()-> new UsuarioNotFoundException(id));
     }
+
 }
