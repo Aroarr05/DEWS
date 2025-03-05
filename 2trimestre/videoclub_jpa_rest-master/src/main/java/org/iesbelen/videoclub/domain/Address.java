@@ -4,11 +4,13 @@ import jakarta.persistence.Embeddable;
 import jdk.jfr.Name;
 import lombok.*;
 
+//domain-ex ception-repsoditory-service -controller-posmant-repositoryCustrom
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
+//@ToString
 
 //Una clase que se añade dentro de otra
 //No se usa @ENTITY, es un embeddable

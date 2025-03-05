@@ -16,7 +16,7 @@ import java.util.List;
 @Data //Getters y Setters
 @AllArgsConstructor //Crea el constructor
 @NoArgsConstructor //Crea un constructor vacio
-@Builder
+@Builder //ayuda a reducir el código repetitivo
 
 //Si utilizo @OneToMany(FetchType.LAZY) además debo usar
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

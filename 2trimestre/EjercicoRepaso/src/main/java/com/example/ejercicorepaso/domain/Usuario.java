@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.ejercicorepaso.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,19 +7,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "usuario")
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="id_usuario")
+
+    private int idUsuario;
     private String nombre;
 
     @OneToOne
-    @JoinColumn(name= "perfil_id", referencedColumnName = "id")
     private Perfil perfil;
+
+    @ManyToOne()
+    @JoinColumn(name= "id_orden",nullable = false)
+    private Orden orden;
+
 }

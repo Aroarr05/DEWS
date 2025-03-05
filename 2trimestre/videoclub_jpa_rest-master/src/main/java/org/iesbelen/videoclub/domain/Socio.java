@@ -32,7 +32,7 @@ public class Socio {
     })
     private Set<Address> addresses = new HashSet<>();
 
-    //la lista solo tiene una direccion
+    //si es una una
     @Embedded
     private Address mainAddress;
 

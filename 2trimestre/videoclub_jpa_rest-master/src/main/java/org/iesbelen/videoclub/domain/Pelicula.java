@@ -4,10 +4,7 @@ package org.iesbelen.videoclub.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Year;
@@ -23,11 +20,11 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class Pelicula {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//usa en una entidad para indicar que el valor de la clave primaria (@Id) será autogenerado por la base de datos utilizando una columna con auto-incremento.
     @Column(name="id_pelicula")
     private long idPelicula;
 
