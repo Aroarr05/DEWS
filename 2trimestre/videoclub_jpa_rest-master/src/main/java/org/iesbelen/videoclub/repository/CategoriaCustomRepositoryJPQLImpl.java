@@ -34,6 +34,4 @@ public class CategoriaCustomRepositoryJPQLImpl implements  CategoriaCustomReposi
         }
         return query.getResultList();
     }
-
-
 }

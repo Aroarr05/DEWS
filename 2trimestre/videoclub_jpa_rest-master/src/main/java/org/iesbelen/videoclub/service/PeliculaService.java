@@ -80,6 +80,7 @@ public class PeliculaService {
     public List<Pelicula> all() {
         return this.peliculaRepository.findAll();
     }
+
     //---------------
 
     public Pelicula save(Pelicula pelicula) {

@@ -19,7 +19,6 @@ public class IdiomaController {
     @Autowired
     private IdiomaService idiomaService;
 
-
     @GetMapping({"","/"})
     public List<Idioma> all() {
         log.info("Accediendo a todas los idiomas");

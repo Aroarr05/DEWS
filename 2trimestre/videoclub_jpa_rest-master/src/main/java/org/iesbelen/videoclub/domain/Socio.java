@@ -47,6 +47,4 @@ public class Socio {
     @JoinColumn(name="tarjeta_id", referencedColumnName = "id")
     private Tarjeta tarjeta;
 
-
-
 }

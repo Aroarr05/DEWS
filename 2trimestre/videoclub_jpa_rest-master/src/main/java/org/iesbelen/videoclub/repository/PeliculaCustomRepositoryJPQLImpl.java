@@ -24,10 +24,8 @@ public class PeliculaCustomRepositoryJPQLImpl implements PeliculaCustomRepsitory
             String column = ordenes[0];
             String direction = ordenes[1];
             queryBuilder.append("p."+column+ " ").append(direction.equalsIgnoreCase("asc") ? "ASC" : "DESC");
-
         }
     }
     return em.createQuery(queryBuilder.toString(), Pelicula.class).getResultList();
  }
-
 }

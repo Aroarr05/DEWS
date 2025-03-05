@@ -21,4 +21,5 @@ public class Tarjeta {
     private Date caducidad;
     @OneToOne(mappedBy = "tarjeta")
     private Socio socio;
+
 }
