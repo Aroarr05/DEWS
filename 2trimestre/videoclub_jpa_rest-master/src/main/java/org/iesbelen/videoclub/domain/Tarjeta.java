@@ -1,4 +1,5 @@
 package org.iesbelen.videoclub.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class Tarjeta {
     private Long id;
     private Date caducidad;
     @OneToOne(mappedBy = "tarjeta")
+    @JsonIgnore
     private Socio socio;
 
 }

@@ -46,5 +46,4 @@ public class Socio {
     @OneToOne
     @JoinColumn(name="tarjeta_id", referencedColumnName = "id")
     private Tarjeta tarjeta;
-
 }

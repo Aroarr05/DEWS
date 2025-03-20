@@ -1,7 +1,7 @@
 package org.iesbelen.videoclub.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.iesbelen.videoclub.domain.Categoria;
+
 import org.iesbelen.videoclub.domain.Idioma;
 import org.iesbelen.videoclub.service.IdiomaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,8 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/idiomas")
+
 public class IdiomaController {
 
     @Autowired

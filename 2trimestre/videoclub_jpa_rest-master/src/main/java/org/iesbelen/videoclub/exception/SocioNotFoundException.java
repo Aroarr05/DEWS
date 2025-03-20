@@ -1,7 +1,7 @@
 package org.iesbelen.videoclub.exception;
 
 public class SocioNotFoundException extends RuntimeException {
-  public SocioNotFoundException(String message) {
-    super(message);
-  }
+    public SocioNotFoundException(Long id) {
+        super("Not found Socio with id: " + id);
+    }
 }
