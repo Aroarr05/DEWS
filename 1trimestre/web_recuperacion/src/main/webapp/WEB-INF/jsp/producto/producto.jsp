@@ -44,11 +44,9 @@
         </form>
         <%
             List<Producto> listaProducto = (List<Producto>) request.getAttribute("listaProductos");
-            if (listaProducto != null && !listaProducto.isEmpty()) {
-        %>
-        <%
             List<Categoria> listaCategoria = (List<Categoria>) request.getAttribute("listaCategorias");
-            if (listaCategoria != null && !listaCategoria.isEmpty()) {
+
+            if (listaProducto != null && listaCategoria != null) {
         %>
         <table class="table table-bordered table-striped">
             <thead>
@@ -63,11 +61,20 @@
 
             </thead>
             <tbody>
-            <% for (Categoria categoria : listaCategoria) { %>
             <% for (Producto producto : listaProducto) { %>
             <tr>
                 <td><%= producto.getIdprod() %></td>
-                <td><%= categoria.getNombre() %></td>
+
+                <%
+                    String categoriaNombre = "No Disponible";
+                    for (Categoria categoria : listaCategoria) {
+                        if (categoria.getIdcat() == producto.getIdcat()) {
+                            categoriaNombre = categoria.getNombre();
+                            break;
+                        }
+                    }
+                %>
+                <td><%= categoriaNombre%></td>
                 <td><%= producto.getNombre() %></td>
                 <td><%= producto.getPrecio() %></td>
                 <td><%= producto.getStock() %></td>
@@ -86,10 +93,8 @@
                 </td>
             </tr>
             <% } %>
-            <% } %>
             </tbody>
         </table>
-        <% } %>
         <% } else { %>
         <p class="no-users">No hay registros de Producto.</p>
         <% } %>

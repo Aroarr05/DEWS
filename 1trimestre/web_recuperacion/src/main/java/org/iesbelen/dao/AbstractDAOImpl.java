@@ -101,7 +101,5 @@ public abstract class AbstractDAOImpl {
 			}
 	}
 
-	public abstract void create(Producto producto);
 
-	public abstract void create(Categoria categoria);
 }

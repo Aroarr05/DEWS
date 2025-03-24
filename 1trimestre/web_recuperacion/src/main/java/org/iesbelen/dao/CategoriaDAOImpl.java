@@ -115,13 +115,5 @@ public class CategoriaDAOImpl extends AbstractDAOImpl implements CategoriaDAO {
         }
     }
 
-    @Override
-    public void create(Producto producto) {
 
-    }
-
-    @Override
-    public void create(Categoria categoria) {
-
-    }
 }

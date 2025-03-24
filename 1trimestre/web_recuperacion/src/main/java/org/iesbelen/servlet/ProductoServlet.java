@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.iesbelen.dao.CategoriaDAO;
+import org.iesbelen.dao.CategoriaDAOImpl;
 import org.iesbelen.dao.ProductoDAO;
 import org.iesbelen.dao.ProductoDAOImpl;
 import org.iesbelen.model.Producto;
@@ -24,9 +26,13 @@ public class ProductoServlet extends HttpServlet{
         String pathInfo = request.getPathInfo(); //
 
         if (pathInfo == null || "/".equals(pathInfo)) {
+
             ProductoDAO prodDAO = new ProductoDAOImpl();
+            CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
 
             request.setAttribute("listaProductos", prodDAO.getAll());
+            request.setAttribute("listaCategorias", categoriaDAO.getAll());
+
             dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/producto/producto.jsp");
 
             String nombre = request.getParameter("filtrar-por-nombre");
@@ -35,6 +41,7 @@ public class ProductoServlet extends HttpServlet{
                 System.out.println(nombre);
             }else {
                 request.setAttribute("listaProductos", prodDAO.getAll());
+                request.setAttribute("listaCategorias", categoriaDAO.getAll());
             }
 
         } else {
@@ -47,6 +54,7 @@ public class ProductoServlet extends HttpServlet{
 
             } else if (pathParts.length == 2) {
                 ProductoDAO empleDAO = new ProductoDAOImpl();
+
                 try {
                     request.setAttribute("producto",empleDAO.find(Integer.parseInt(pathParts[1])));
                     dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/producto/detalle-Producto.jsp");
@@ -88,6 +96,7 @@ public class ProductoServlet extends HttpServlet{
             String nombre = request.getParameter("nombre");
             Double precio = Double.parseDouble(request.getParameter("precio"));
             int stock = Integer.parseInt(request.getParameter("stock"));
+            int categoria = Integer.parseInt(request.getParameter("categoria"));
 
 
             Producto nuevoProd = new Producto();
@@ -95,6 +104,7 @@ public class ProductoServlet extends HttpServlet{
             nuevoProd.setNombre(nombre);
             nuevoProd.setPrecio(precio);
             nuevoProd.setStock(stock);
+            nuevoProd.setIdcat(categoria);
             depaDAO.create(nuevoProd);
 
         } else if (__method__ != null && "put".equalsIgnoreCase(__method__)) {

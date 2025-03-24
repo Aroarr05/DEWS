@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="org.iesbelen.model.Categoria" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
@@ -59,6 +61,30 @@
           </div>
           <div style="float: none;width: auto;overflow: hidden;">
             <input name="stock" />
+          </div>
+        </div>
+        <div style="margin-top: 6px;" class="clearfix">
+          <div style="float: left;width: 50%">
+            Categoria
+          </div>
+          <div style="float: none;width: auto;overflow: hidden;">
+            <select name="categoria">
+              <%
+                List<Categoria> listaCategorias = (List<Categoria>) request.getAttribute("listaCategorias");
+                if (listaCategorias != null) {
+                  for (Categoria categoria : listaCategorias) {
+              %>
+              <option value="<%= categoria.getIdcat() %>"><%= categoria.getNombre() %></option>
+              <%
+                }
+              } else {
+              %>
+              <option value="">No hay categorías disponibles</option>
+              <%
+                }
+              %>
+            </select>
+
           </div>
         </div>
       </form>

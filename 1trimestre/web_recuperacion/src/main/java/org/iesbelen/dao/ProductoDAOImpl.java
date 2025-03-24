@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO {
+
+
+
     @Override
     public void create(Producto producto) {
         Connection conn = null;
@@ -42,6 +45,7 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO {
             closeDb(conn, ps, rs);
         }
     }
+
 
     @Override
     public List<Producto> getAll() {
@@ -115,37 +119,4 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO {
 
     }
 
-    @Override
-    public synchronized void create(Categoria categoria) {
-
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        ResultSet rsGenKeys = null;
-
-        try {
-            conn = connectDB();
-
-            ps = conn.prepareStatement("INSERT INTO categoria (nombre) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-
-            int idx = 1;
-            ps.setString(idx++, categoria.getNombre());
-
-            int rows = ps.executeUpdate();
-            if (rows == 0)
-                System.out.println("INSERT de Categoria con 0 filas insertadas.");
-
-            rsGenKeys = ps.getGeneratedKeys();
-            if (rsGenKeys.next())
-                categoria.setIdcat(rsGenKeys.getInt(1));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            closeDb(conn, ps, rs);
-        }
-
-    }
 }

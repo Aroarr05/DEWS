@@ -1,6 +1,6 @@
 
 <nav class="menu">
-    <a href="/web_recuperiacion_war/">HOME</a>
-    <a href="/web_recuperiacion_war/ventas_plus/categoria/">Categotia</a>
-    <a href="/web_recuperiacion_war/ventas_plus/producto/">Producto</a>
+    <a href="/web_recuperacion_war/">HOME</a>
+    <a href="/web_recuperacion_war/ventas_plus/categoria/">Categotia</a>
+    <a href="/web_recuperacion_war/ventas_plus/producto/">Producto</a>
 </nav>
