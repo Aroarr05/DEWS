@@ -21,10 +21,11 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO {
 
         try {
             conn = connectDB();
-            ps = conn.prepareStatement("INSERT INTO producto (idcat, nombre, precio, stock) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps = conn.prepareStatement("INSERT INTO producto (idprod, idcat, nombre, precio, stock) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
             int idx = 1;
-            ps.setInt(idx, producto.getIdcat());
+            ps.setInt(idx++, producto.getIdprod());
+            ps.setInt(idx++, producto.getIdcat());
             ps.setString(idx++, producto.getNombre());
             ps.setDouble(idx++, producto.getPrecio());
             ps.setInt(idx, producto.getStock());
@@ -63,8 +64,8 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO {
             while (rs.next()) {
                 Producto prod = new Producto();
                 int idx = 1;
-                prod.setIdprod(rs.getInt("idprod"));  // Leer idprod correctamente
-                prod.setIdcat(rs.getInt("idcat"));    // Leer idcat correctamente
+                prod.setIdprod(rs.getInt("idprod"));
+                prod.setIdcat(rs.getInt("idcat"));
                 prod.setNombre(rs.getString("nombre"));
                 prod.setPrecio(rs.getDouble("precio"));
                 prod.setStock(rs.getInt("stock"));

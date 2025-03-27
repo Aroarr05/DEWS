@@ -41,6 +41,14 @@
 
         <div style="margin-top: 6px;" class="clearfix">
           <div style="float: left;width: 50%">
+            ID Producto
+          </div>
+          <div style="float: none;width: auto;overflow: hidden;">
+            <input name="idproducto" />
+          </div>
+        </div>
+        <div style="margin-top: 6px;" class="clearfix">
+          <div style="float: left;width: 50%">
             Nombre
           </div>
           <div style="float: none;width: auto;overflow: hidden;">
@@ -77,11 +85,7 @@
               <option value="<%= categoria.getIdcat() %>"><%= categoria.getNombre() %></option>
               <%
                 }
-              } else {
-              %>
-              <option value="">No hay categorías disponibles</option>
-              <%
-                }
+              }
               %>
             </select>
 

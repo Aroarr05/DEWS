@@ -21,21 +21,20 @@ public class CategoriaDAOImpl extends AbstractDAOImpl implements CategoriaDAO {
         Statement s = null;
         ResultSet rs = null;
 
-        List<Categoria> listFab = new ArrayList<>();
+        List<Categoria> listaCategorias = new ArrayList<>();
 
         try {
             conn = connectDB();
 
-            // Se utiliza un objeto Statement dado que no hay parámetros en la consulta.
             s = conn.createStatement();
 
             rs = s.executeQuery("SELECT * FROM categoria");
             while (rs.next()) {
-                Categoria fab = new Categoria();
+                Categoria categoria = new Categoria();
                 int idx = 1;
-                fab.setIdcat(rs.getInt(idx++));
-                fab.setNombre(rs.getString(idx));
-                listFab.add(fab);
+                categoria.setIdcat(rs.getInt(idx++));
+                categoria.setNombre(rs.getString(idx));
+                listaCategorias.add(categoria);
             }
 
         } catch (SQLException e) {
@@ -45,7 +44,7 @@ public class CategoriaDAOImpl extends AbstractDAOImpl implements CategoriaDAO {
         } finally {
             closeDb(conn, s, rs);
         }
-        return listFab;
+        return listaCategorias;
 
     }
 

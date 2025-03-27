@@ -35,14 +35,14 @@ public class ProductoServlet extends HttpServlet{
 
             dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/producto/producto.jsp");
 
-            String nombre = request.getParameter("filtrar-por-nombre");
-
-            if (nombre != null && !nombre.isEmpty()) {
-                System.out.println(nombre);
-            }else {
-                request.setAttribute("listaProductos", prodDAO.getAll());
-                request.setAttribute("listaCategorias", categoriaDAO.getAll());
-            }
+//            String nombre = request.getParameter("filtrar-por-nombre");
+//
+//            if (nombre != null && !nombre.isEmpty()) {
+//                System.out.println(nombre);
+//            }else {
+//                request.setAttribute("listaProductos", prodDAO.getAll());
+//                request.setAttribute("listaCategorias", categoriaDAO.getAll());
+//            }
 
         } else {
 
@@ -51,7 +51,8 @@ public class ProductoServlet extends HttpServlet{
 
             if (pathParts.length == 2 && "crear".equals(pathParts[1])) {
                 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/producto/crear-producto.jsp");
-
+                CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
+                request.setAttribute("listaCategorias", categoriaDAO.getAll());
             } else if (pathParts.length == 2) {
                 ProductoDAO empleDAO = new ProductoDAOImpl();
 
@@ -93,30 +94,26 @@ public class ProductoServlet extends HttpServlet{
             // Crear uno nuevo
             ProductoDAO depaDAO = new ProductoDAOImpl();
 
+            int idprod = Integer.parseInt(request.getParameter("idproducto"));
+            int idcat = Integer.parseInt(request.getParameter("categoria"));
             String nombre = request.getParameter("nombre");
             Double precio = Double.parseDouble(request.getParameter("precio"));
             int stock = Integer.parseInt(request.getParameter("stock"));
-            int categoria = Integer.parseInt(request.getParameter("categoria"));
 
 
             Producto nuevoProd = new Producto();
 
+            nuevoProd.setIdprod(idprod);
+            nuevoProd.setIdcat(idcat);
             nuevoProd.setNombre(nombre);
             nuevoProd.setPrecio(precio);
             nuevoProd.setStock(stock);
-            nuevoProd.setIdcat(categoria);
             depaDAO.create(nuevoProd);
 
         } else if (__method__ != null && "put".equalsIgnoreCase(__method__)) {
-            // Actualizar uno existente
-            //Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actulización PUT.
             doPut(request, response);
-
         } else if (__method__ != null && "delete".equalsIgnoreCase(__method__)) {
-            // Actualizar uno existente
-            //Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actulización DELETE.
             doDelete(request, response);
-
         } else {
             System.out.println("Opción POST no soportada.");
         }
