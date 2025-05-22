@@ -59,4 +59,5 @@
         margin-left: 20px;
         color: #1e3a5f; /* Azul grisáceo para texto del cuerpo */
     }
+
 </style>

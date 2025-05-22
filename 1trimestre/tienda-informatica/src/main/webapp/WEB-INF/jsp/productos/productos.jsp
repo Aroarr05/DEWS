@@ -51,10 +51,12 @@
 			<% } %>
 		</div>
 
+		<div class="centrado">
 		<form class="d-flex mb-3" action="${pageContext.request.contextPath}/tienda/productos/" method="get">
 			<input type="search" name="filtrar-por-nombre" class="form-control me-2" placeholder="Buscar por nombre">
 			<button type="submit" class="btn btn-outline-secondary">Filtrar</button>
 		</form>
+		</div>
 
 		<hr>
 

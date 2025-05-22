@@ -6,6 +6,12 @@ import java.util.Optional;
 public class    FabricanteDTO extends Fabricante{
     private int numProductos;
 
+    public int getNumProductos() {
+        return numProductos;
+    }
+    public void setNumProductos(int numProductos) {
+        this.numProductos = numProductos;
+    }
 
     public FabricanteDTO(Fabricante fabricante, int numProductos) {
         this.setIdFabricante(fabricante.getIdFabricante());
@@ -13,11 +19,4 @@ public class    FabricanteDTO extends Fabricante{
         this.setNumProductos(numProductos);
     }
 
-
-    public int getNumProductos() {
-        return numProductos;
-    }
-    public void setNumProductos(int numProductos) {
-        this.numProductos = numProductos;
-    }
 }

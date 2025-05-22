@@ -54,8 +54,6 @@ public class FabricantesServlet extends HttpServlet {
 			request.setAttribute("listaFabricantes", fabricanteDTOS);
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/fabricantes/fabricantes.jsp");
 
-
-
 				List<FabricanteDTO> listaOrdenar = fabricanteDTOS;
 				String orden_por = request.getParameter("orden-por");
 				String modo_ordenar = request.getParameter("orden-por");
@@ -64,25 +62,20 @@ public class FabricantesServlet extends HttpServlet {
 					if(orden_por.equals("nombre")){
 						if (modo_ordenar.equals("asc")) {
 							listaOrdenar = fabricanteDTOS.stream().sorted(Comparator.comparing(Fabricante::getNombre)).toList();
-
 						}
 						else if (modo_ordenar.equals("desc")) {
 							listaOrdenar = fabricanteDTOS.stream().sorted(Comparator.comparing(Fabricante::getNombre).reversed()).toList();
-
 						}
 					}
 					else if(orden_por.equals("codigo")){
 						if (modo_ordenar.equals("asc")) {
 							listaOrdenar = fabricanteDTOS.stream().sorted(Comparator.comparing(Fabricante::getIdFabricante)).toList();
-
 						}
 						else if (modo_ordenar.equals("desc")) {
 							listaOrdenar = fabricanteDTOS.stream().sorted(Comparator.comparing(Fabricante::getIdFabricante).reversed()).toList();
-
 						}
 					}
 				}
-
 
 				request.setAttribute("listaFabricantes", listaOrdenar);
 				dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/fabricantes/fabricantes.jsp");
